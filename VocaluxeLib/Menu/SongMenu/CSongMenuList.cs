@@ -157,14 +157,12 @@ namespace VocaluxeLib.Menu.SongMenu
 
         private void _InitTiles()
         {
-            MaxRect = _Theme.SongMenuList.TileRect;
+            MaxRect = SmallView ? _Theme.SongMenuList.TileRectSmall : _Theme.SongMenuList.TileRect;
 
-            //keep tile ratio 3/2 so the covers still look nice. 
-            _CoverTileWidth = _ListLength * 3.0f / 2;
-            _ListTextWidth = Rect.W - _ListTextWidth;
+            _ListTextWidth = MaxRect.W - _ListTextWidth;
 
-            _TileW = (int)((Rect.W - _SpaceW * (_CoverTileWidth - 1)) / _CoverTileWidth);
-            _TileH = (int)((Rect.H - _SpaceH * (_ListLength - 1)) / _ListLength);
+            _TileW = (int)((MaxRect.H - _SpaceH * (_ListLength - 1)) / _ListLength);
+            _TileH = _TileW;
 
             _CoverBGTexture = CBase.Themes.GetSkinTexture(_Theme.CoverBackground, _PartyModeID);
             _CoverBigBGTexture = CBase.Themes.GetSkinTexture(_Theme.CoverBigBackground, _PartyModeID);
@@ -181,10 +179,12 @@ namespace VocaluxeLib.Menu.SongMenu
                 _Tiles.Add(tile);
 
                 //Create text
-                var textRect = new SRectF(Rect.X + 2 * (_TileW + _SpaceW), Rect.Y + i * (_TileH + _SpaceH), _ListTextWidth, _TileH, Rect.Z);
+                var textRect = new SRectF(MaxRect.X + 2 * (_TileW + _SpaceW), Rect.Y + i * (_TileH + _SpaceH), _ListTextWidth, _TileH, Rect.Z);
                 CText text = new CText(textRect.X, textRect.Y, textRect.Z,
                                        textRect.H, textRect.W, EAlignment.Left, EStyle.Normal,
                                        "Normal", _Artist.Color, "");
+                text.MaxRect = new SRectF(text.MaxRect.X, text.MaxRect.Y, MaxRect.W + MaxRect.X - text.Rect.X - 5f, text.MaxRect.H, text.MaxRect.Z);
+                text.ResizeAlign = EHAlignment.Center;
 
                 _Texts.Add(text);
             }
@@ -430,7 +430,7 @@ namespace VocaluxeLib.Menu.SongMenu
                     //create a rect including the cover and text of the song. 
                     //(this way mouse over text should make a selection as well)
                     SRectF songRect = new SRectF(tile.Rect.X, tile.Rect.Y, Rect.W, tile.Rect.H, tile.Rect.Z);
-                    if (tile.Texture != _CoverBGTexture && CHelper.IsInBounds(songRect, mouseEvent))
+                    if (tile.Texture != _CoverBGTexture && CHelper.IsInBounds(songRect, mouseEvent) && tile.Color.A != 0)
                     {
                         somethingSelected = true;
                         _SelectionNr = i + _Offset;
@@ -528,6 +528,17 @@ namespace VocaluxeLib.Menu.SongMenu
         public override CStatic GetSelectedSongCover()
         {
             return _Tiles.FirstOrDefault(tile => tile.Selected);
+        }
+
+        public override bool IsMouseOverSelectedSong(SMouseEvent mEvent)
+        {
+            for (int i = 0; i < _Tiles.Count; i++)
+            {
+                if (!_Tiles[i].Selected)
+                    continue;
+                return CHelper.IsInBounds(_Tiles[i].Rect, mEvent) || CHelper.IsInBounds(_Texts[i].Rect, mEvent);
+            }
+            return false;
         }
 
         protected override void _EnterCategory(int categoryNr)

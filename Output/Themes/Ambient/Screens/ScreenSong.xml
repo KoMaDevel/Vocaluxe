@@ -2,7 +2,7 @@
 <Screen xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Informations>
     <ScreenName>ScreenSong</ScreenName>
-    <ScreenVersion>5</ScreenVersion>
+    <ScreenVersion>6</ScreenVersion>
   </Informations>
   <Backgrounds>
     <Background Name="Background1">
@@ -810,7 +810,7 @@
           <Rect>
             <X>40</X>
             <Y>40</Y>
-            <W>3600</W>
+            <W>360</W>
             <H>550</H>
             <Z>-1</Z>
           </Rect>
@@ -862,7 +862,7 @@
       </SongMenuTileBoard>
 	  
 	   <SongMenuList>
-        <ListLength>20</ListLength>
+        <ListLength>15</ListLength>
         <SpaceW>10</SpaceW>
         <SpaceH>10</SpaceH>
         <TileRect>
@@ -872,6 +872,13 @@
           <H>550</H>
           <Z>-1</Z>
         </TileRect>
+        <TileRectSmall>
+          <X>410</X>
+          <Y>40</Y>
+          <W>555</W>
+          <H>550</H>
+          <Z>-1</Z>
+        </TileRectSmall>
         <TextArtist Name="TextArtist">
           <X>222</X>
           <Y>416</Y>
@@ -931,7 +938,7 @@
           <Rect>
             <X>40</X>
             <Y>40</Y>
-            <W>3600</W>
+            <W>360</W>
             <H>550</H>
             <Z>-1</Z>
           </Rect>
@@ -1021,7 +1028,7 @@
       <TextColor Name="TextColor" />
       <TextSelColor Name="TextSelColor" />
       <TextH>25</TextH>
-      <TextRelativeX>0</TextRelativeX>
+      <TextRelativeX>50</TextRelativeX>
       <TextRelativeY>0</TextRelativeY>
       <TextMaxW>280</TextMaxW>
       <TextFont>Outline</TextFont>
@@ -1063,7 +1070,7 @@
       <TextColor Name="TextColor" />
       <TextSelColor Name="TextSelColor" />
       <TextH>25</TextH>
-      <TextRelativeX>0</TextRelativeX>
+      <TextRelativeX>50</TextRelativeX>
       <TextRelativeY>0</TextRelativeY>
       <TextMaxW>280</TextMaxW>
       <TextFont>Outline</TextFont>
@@ -1105,7 +1112,7 @@
       <TextColor Name="TextColor" />
       <TextSelColor Name="TextSelColor" />
       <TextH>25</TextH>
-      <TextRelativeX>0</TextRelativeX>
+      <TextRelativeX>50</TextRelativeX>
       <TextRelativeY>0</TextRelativeY>
       <TextMaxW>280</TextMaxW>
       <TextFont>Outline</TextFont>
@@ -1147,7 +1154,7 @@
       <TextColor Name="TextColor" />
       <TextSelColor Name="TextSelColor" />
       <TextH>25</TextH>
-      <TextRelativeX>0</TextRelativeX>
+      <TextRelativeX>50</TextRelativeX>
       <TextRelativeY>0</TextRelativeY>
       <TextMaxW>280</TextMaxW>
       <TextFont>Outline</TextFont>
@@ -1354,7 +1361,7 @@
           <Text />
           </Text>
             </ButtonPlaylistSing>
-      <SelectSlideGameMode>
+      <SelectSlideGameMode Name="SelectSlideGameMode">
         <Skin>Button</Skin>
         <SkinArrowLeft>SelectSlideArrowLeft</SkinArrowLeft>
         <SkinArrowRight>SelectSlideArrowRight</SkinArrowRight>
